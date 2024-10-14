@@ -15,9 +15,9 @@ open import 1-1-DCwF
 variable
     Γn : neutC Γ
 
-COMP : (t : Tm Γ (C ⁻ᵗ)) → Ty (Γ ▹ C)
+COMP : (t : Tm Γ (C ⁻ᵗ)) → Ty (Γ ▷ C)
 COMP t = Hom (t [ p ]t) v
-COMP' : (t : Tm Γ (C ⁻ᵗ)) → Ty (Γ ▹ C)
+COMP' : (t : Tm Γ (C ⁻ᵗ)) → Ty (Γ ▷ C)
 COMP' t = (COMP t) ⁻ᵗ
 
 lemm : (t : Tm Γ (C ⁻ᵗ)) → 
@@ -60,13 +60,13 @@ l-unit {Γ}{C}{Γn}{t}{t'} f =
 --     Tm Γ (Id {Cn = Homn} (-_ {Γn = Γn} (_·_ {Γn = Γn} (rfl t') g)) g)
 -- r-unit {Γ}{C}{Γn}{t'}{t''} g = ap (Tm Γ) lemm4 ((J t' R r₀) [ id ,₊ t'' ,₊ g ]t)
 --     where
---         rfl·⁻ : Tm (Γ ▹ C ▹ Hom (t' [ p ]t) v) ((Hom (t' [ p ]t) v [ p ]T) ⁻ᵗ)
---         rfl·⁻ = (ap (Tm  (Γ ▹ C ▹ Hom (t' [ p ]t) v)) (lemm {C = C} t') (J' {Γn = Γn}{C = C} t' (COMP' t') (ap (Tm Γ) (lemm2 t' (- t')) (-_ {Γn = Γn} (rfl t')))))
+--         rfl·⁻ : Tm (Γ ▷ C ▷ Hom (t' [ p ]t) v) ((Hom (t' [ p ]t) v [ p ]T) ⁻ᵗ)
+--         rfl·⁻ = (ap (Tm  (Γ ▷ C ▷ Hom (t' [ p ]t) v)) (lemm {C = C} t') (J' {Γn = Γn}{C = C} t' (COMP' t') (ap (Tm Γ) (lemm2 t' (- t')) (-_ {Γn = Γn} (rfl t')))))
         
 --         rfl·⁻[] : rfl·⁻ [ id ,₊ - t' ,₊ rfl t' ]t ≡ - (rfl t')
 --         rfl·⁻[] = ?  
 
---         R : Ty (Γ ▹ C ▹ Hom (t' [ p ]t) v)
+--         R : Ty (Γ ▷ C ▷ Hom (t' [ p ]t) v)
 --         R = Id {Cn = Homn} rfl·⁻ v
 
 --         lemm3 : Id {Cn = Homn} (-_ {Γn = Γn} (rfl {Γn = Γn} t')) (rfl {C = C} t') 

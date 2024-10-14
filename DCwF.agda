@@ -23,12 +23,12 @@ postulate
     --     (rfl {C = C} t) [ γ ]t ≡ rfl (t [ γ ]t)
     J : ∀{Γ : Con}{Γn : neutC Γ}{C : Ty Γ} → 
             (t : Tm Γ (C ⁻ᵗ)) → 
-            (M : Ty (Γ ▹ C ▹ (Hom (t [ p ]t) v))) → 
+            (M : Ty (Γ ▷ C ▷ (Hom (t [ p ]t) v))) → 
             Tm Γ (M [ id ,₊ - t ,₊ rfl {Γn = Γn} t ]T) → 
-            Tm (Γ ▹ C ▹ (Hom (t [ p ]t) v)) M
+            Tm (Γ ▷ C ▷ (Hom (t [ p ]t) v)) M
     Jβ : ∀{Γ : Con}{Γn : neutC Γ}{C : Ty Γ} → 
             (t : Tm Γ (C ⁻ᵗ)) → 
-            (M : Ty (Γ ▹ C ▹ (Hom (t [ p ]t) v))) → 
+            (M : Ty (Γ ▷ C ▷ (Hom (t [ p ]t) v))) → 
             (m : Tm Γ (M [ id ,₊ - t ,₊ rfl t ]T)) → 
             (J t M m) [ id ,₊ - t ,₊ rfl {Γn = Γn} t ]t ≡ m
 
@@ -39,13 +39,13 @@ Id = Hom
 -- J whose motive M only depends on t', not on q
 J' : ∀{Γ : Con}{Γn : neutC Γ}{C : Ty Γ} → 
             (t : Tm Γ (C ⁻ᵗ)) → 
-            (M : Ty (Γ ▹ C )) → 
+            (M : Ty (Γ ▷ C )) → 
             Tm Γ (M [ id ,₊ -_ {Γn = Γn} t ]T) → 
-            Tm (Γ ▹ C ▹ (Hom (t [ p ]t) v)) (M [ p ]T)
+            Tm (Γ ▷ C ▷ (Hom (t [ p ]t) v)) (M [ p ]T)
 J' t M m = J t (M [ p ]T) m
 J'β : ∀{Γ : Con}{Γn : neutC Γ}{C : Ty Γ} → 
             (t : Tm Γ (C ⁻ᵗ)) → 
-            (M : Ty (Γ ▹ C )) → 
+            (M : Ty (Γ ▷ C )) → 
             (m : Tm Γ (M [ id ,₊ -_ {Γn = Γn} t ]T)) → 
             (J' t M m) [ id ,₊ - t ,₊ rfl {Γn = Γn} t ]t ≡ m
 J'β t M m = Jβ t (M [ p ]T) m
@@ -58,9 +58,9 @@ symm : ∀{Γ : Con}{Γn : neutC Γ}{C : Ty Γ}{Cn : neutT C}{t : Tm Γ (C ⁻�
 symm {Γ}{Γn}{C}{Cn}{t}{t'} q = 
     ap (λ x → Tm Γ x) path ((J' t S s) [ id ,₊ t' ,₊ q ]t)
     where
-        -- can only formulate this S because we have (Γn ▹neutC Cn) : neutC (Γ ▹ C),
-        -- allowing us to form -v : Tm (Γ▹C) (C[p]⁻)
-        S : Ty (Γ ▹ C)
+        -- can only formulate this S because we have (Γn ▷neutC Cn) : neutC (Γ ▷ C),
+        -- allowing us to form -v : Tm (Γ▷C) (C[p]⁻)
+        S : Ty (Γ ▷ C)
         S = Id {Cn = Cn [ p ]neutT} (- v) ((- t) [ p ]t)
         
         lemm1 : t ≡ (- v) [ id ,₊ (- t) ]t
@@ -85,7 +85,7 @@ symm {Γ}{Γn}{C}{Cn}{t}{t'} q =
                 ≡⟨ S [ p {C = Hom (t [ p ]t) v} ∣ id ,₊ t' ,₊ q ]T ⟩
             S [ v⟨ C ⟩↦ t' ]T
                 ≡⟨ refl ⟩
-            Id {Cn = Cn} ((-_ {Γn = Γn ▹neutC Cn} v) [ id ,₊ t' ]t) (- t)
+            Id {Cn = Cn} ((-_ {Γn = Γn ▷neutC Cn} v) [ id ,₊ t' ]t) (- t)
                 ≡⟨ cong (λ x →  Id {Cn = Cn} x (-_ {Γn = Γn} t)) (- v [ id ,₊ t' ]≡) ⟩
             Id {Cn = Cn} (- t') (- t)
             ∎
